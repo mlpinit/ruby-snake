@@ -8,6 +8,8 @@ describe Frame do
     def expected_display
       [
         # 0123456
+        'SCORE: -10',
+        ##############
         'xxxxxxx', # 0
         'x     x', # 1
         'x x   x', # 2
@@ -20,10 +22,14 @@ describe Frame do
 
     it 'build a display' do
       border = OpenStruct.new(max_long: 6, max_lat: 6)
-      snake = Snake.new(state: [[2,2],[2,3]], direction: :south)
       rodent_location = [4,5]
+      snake = Snake.new(
+        state: [[2,2],[2,3]],
+        direction: :south,
+        rodent_location: rodent_location,
+        border: border )
       frame = Frame.new(
-        snake: snake,
+        snake_state: snake.state,
         border: border,
         rodent_location: rodent_location )
       frame.build_display

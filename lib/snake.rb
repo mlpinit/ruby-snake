@@ -2,7 +2,6 @@ require 'ostruct'
 
 class Snake
   class DirectionError < StandardError; end
-  class CoruptState < StandardError; end
 
   DIRECTIONS = %i(north south west east).freeze
 
@@ -13,7 +12,7 @@ class Snake
     @direction ||= args.fetch(:direction)
     @border    ||= args.fetch(:border, default_border)
     @rodent_location = args.fetch(:rodent_location)
-    validate_args
+    raise DirectionError unless DIRECTIONS.include?(direction)
   end
 
   def next_snake
@@ -67,14 +66,6 @@ class Snake
     0
   end
 
-  def validate_args
-    raise DirectionError unless DIRECTIONS.include?(direction)
-    # raise CoruptState if corupt?(state)
-  end
-
-  # def corupt?(state)
-  # end
-  
   def default_border
     OpenStruct.new(max_long: 20, max_lat: 30)
   end

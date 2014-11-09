@@ -12,8 +12,6 @@ describe Snake do
           rodent_location: [5,5] )
       end
     end
-
-    it 'raises CoruptStateError if state is corupt'
   end
 
   describe 'rodent' do
